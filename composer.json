@@ -11,8 +11,15 @@
   },
   "require-dev": {
     "phpstan/phpstan": "0.12.82",
-    "pocketmine/pocketmine-mp": "3.18.0"
+    "pocketmine/pocketmine-mp": "dev-stable"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "name": "pocketmine/pocketmine-mp",
+      "url": "https://github.com/VixikHD/PocketMine-MP"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "": ["src"]

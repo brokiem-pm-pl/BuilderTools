@@ -4,28 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e3491625b3a9eb5f8b73bff220a54c08",
+    "content-hash": "3cf6d4ad17de9fa9ec08b7c220b2dcfa",
     "packages": [],
     "packages-dev": [
         {
             "name": "adhocore/json-comment",
-            "version": "0.1.0",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/adhocore/php-json-comment.git",
-                "reference": "8448076039389f558f39ad0553aab87db3f81614"
+                "reference": "fc2f76979f0a44a5f5bc2a2b600d0762fe0e78e7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/adhocore/php-json-comment/zipball/8448076039389f558f39ad0553aab87db3f81614",
-                "reference": "8448076039389f558f39ad0553aab87db3f81614",
+                "url": "https://api.github.com/repos/adhocore/php-json-comment/zipball/fc2f76979f0a44a5f5bc2a2b600d0762fe0e78e7",
+                "reference": "fc2f76979f0a44a5f5bc2a2b600d0762fe0e78e7",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4"
+                "ext-ctype": "*",
+                "php": ">=7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.5 || ^7.5"
+                "phpunit/phpunit": "^6.5 || ^7.5 || ^8.5"
             },
             "type": "library",
             "autoload": {
@@ -51,9 +52,15 @@
             ],
             "support": {
                 "issues": "https://github.com/adhocore/php-json-comment/issues",
-                "source": "https://github.com/adhocore/php-json-comment/tree/0.1.0"
+                "source": "https://github.com/adhocore/php-json-comment/tree/1.1.2"
             },
-            "time": "2020-01-03T13:51:23+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/ji10",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-04-09T03:06:06+00:00"
         },
         {
             "name": "phpstan/phpstan",
@@ -419,20 +426,20 @@
         },
         {
             "name": "pocketmine/pocketmine-mp",
-            "version": "3.18.0",
+            "version": "dev-stable",
             "source": {
                 "type": "git",
-                "url": "https://github.com/pmmp/PocketMine-MP.git",
-                "reference": "3f6490626319152dca07a5c61a1e94f8d5793d56"
+                "url": "https://github.com/VixikHD/PocketMine-MP.git",
+                "reference": "bcc1a35e71a1354f00bcced861eb03533692a689"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pmmp/PocketMine-MP/zipball/3f6490626319152dca07a5c61a1e94f8d5793d56",
-                "reference": "3f6490626319152dca07a5c61a1e94f8d5793d56",
+                "url": "https://api.github.com/repos/VixikHD/PocketMine-MP/zipball/bcc1a35e71a1354f00bcced861eb03533692a689",
+                "reference": "bcc1a35e71a1354f00bcced861eb03533692a689",
                 "shasum": ""
             },
             "require": {
-                "adhocore/json-comment": "^0.1.0",
+                "adhocore/json-comment": "^1.1",
                 "composer-runtime-api": "^2.0",
                 "ext-ctype": "*",
                 "ext-curl": "*",
@@ -445,6 +452,7 @@
                 "ext-phar": "*",
                 "ext-pthreads": "~3.2.0",
                 "ext-reflection": "*",
+                "ext-simplexml": "*",
                 "ext-sockets": "*",
                 "ext-spl": "*",
                 "ext-yaml": ">=2.0.0",
@@ -464,11 +472,12 @@
                 "pocketmine/spl": "^0.4.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "0.12.80",
+                "phpstan/phpstan": "0.12.83",
                 "phpstan/phpstan-phpunit": "^0.12.6",
                 "phpstan/phpstan-strict-rules": "^0.12.2",
                 "phpunit/phpunit": "^9.2"
             },
+            "default-branch": true,
             "type": "project",
             "autoload": {
                 "psr-4": {
@@ -482,27 +491,39 @@
                     "src/pocketmine/VersionInfo.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "pocketmine\\": "tests/phpunit/"
+                }
+            },
+            "scripts": {
+                "make-devtools": [
+                    "@php -dphar.readonly=0 tests/plugins/DevTools/src/DevTools/ConsoleScript.php --make tests/plugins/DevTools --out plugins/DevTools.phar"
+                ],
+                "make-server": [
+                    "@composer install --no-dev --classmap-authoritative",
+                    "@php -dphar.readonly=0 build/server-phar.php"
+                ]
+            },
             "license": [
                 "LGPL-3.0"
             ],
             "description": "A server software for Minecraft: Pocket Edition written in PHP",
             "homepage": "https://pmmp.io",
             "support": {
-                "issues": "https://github.com/pmmp/PocketMine-MP/issues",
-                "source": "https://github.com/pmmp/PocketMine-MP/tree/3.18.0"
+                "source": "https://github.com/VixikHD/PocketMine-MP/tree/stable"
             },
             "funding": [
                 {
-                    "url": "https://github.com/pmmp/PocketMine-MP#donate",
-                    "type": "custom"
+                    "type": "patreon",
+                    "url": "https://www.patreon.com/pocketminemp"
                 },
                 {
-                    "url": "https://www.patreon.com/pocketminemp",
-                    "type": "patreon"
+                    "type": "custom",
+                    "url": "https://github.com/pmmp/PocketMine-MP#donate"
                 }
             ],
-            "time": "2021-03-12T22:07:01+00:00"
+            "time": "2021-04-13T07:19:40+00:00"
         },
         {
             "name": "pocketmine/raklib",
@@ -630,7 +651,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "pocketmine/pocketmine-mp": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
