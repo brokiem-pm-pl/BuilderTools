@@ -36,7 +36,7 @@ class Canceller {
     }
 
     public function undo(Player $player): EditorResult {
-        $error = function (): EditorResult {
+        $error = static function(): EditorResult {
             return EditorResult::error("There are not any actions to undo");
         };
 
@@ -79,7 +79,7 @@ class Canceller {
     }
 
     public function redo(Player $player): EditorResult {
-        $error = function (): EditorResult {
+        $error = static function(): EditorResult {
             return EditorResult::error("There are not any actions to undo");
         };
 

@@ -171,8 +171,9 @@ class SchematicsManager {
 
         while ($schematic->hasNext()) {
             $schematic->readNext($x, $y, $z, $id, $meta);
-            if($id != 0)
+            if ($id != 0) {
                 $fillSession->setBlockAt($floorX + $x, $floorY + $y, $floorZ + $z, $id, $meta);
+            }
         }
 
         if($fillSession->getBlocksChanged() == 0) {
@@ -191,7 +192,7 @@ class SchematicsManager {
 
     private static function findSchematicFile(string &$file): bool {
         $dataFolder = BuilderTools::getInstance()->getDataFolder() . "schematics" . DIRECTORY_SEPARATOR;
-        $allowedExtensions = array_unique(array_map(fn(string $schematic) => $schematic::getFileExtension(), SchematicsManager::$registeredTypes));
+        $allowedExtensions = array_unique(array_map(static fn(string $schematic) => $schematic::getFileExtension(), SchematicsManager::$registeredTypes));
         $ext = pathinfo($file, PATHINFO_EXTENSION);
         if(in_array($ext, $allowedExtensions)) {
             if(file_exists($dataFolder . $file)) {
@@ -227,7 +228,7 @@ class SchematicsManager {
      * @return class-string<Schematic>
      */
     public static function getSchematicByExtension(string $extension): string {
-        $extension = trim(strtolower($extension));
+        $extension = strtolower(trim($extension));
 
         foreach (SchematicsManager::$registeredTypes as $class) {
             if(strtolower($class::getFileExtension()) == $extension) {

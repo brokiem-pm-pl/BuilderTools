@@ -23,14 +23,14 @@ namespace czechpmdevs\buildertools\commands;
 use czechpmdevs\buildertools\BuilderTools;
 use czechpmdevs\buildertools\Selectors;
 use pocketmine\command\CommandSender;
+use pocketmine\data\bedrock\EnchantmentIdMap;
+use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
+use pocketmine\item\VanillaItems;
 use pocketmine\nbt\NBT;
 use pocketmine\nbt\tag\ByteTag;
 use pocketmine\nbt\tag\ListTag;
-use pocketmine\Player;
-use pocketmine\data\bedrock\EnchantmentIdMap;
-use pocketmine\item\enchantment\EnchantmentInstance;
-use pocketmine\item\VanillaItems;
+use pocketmine\player\Player;
 
 class BlockInfoCommand extends BuilderToolsCommand {
 

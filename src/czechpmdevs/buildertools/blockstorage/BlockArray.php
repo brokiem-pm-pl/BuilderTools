@@ -201,7 +201,7 @@ class BlockArray implements UpdateLevelData, Serializable {
 
         // TODO - Optimize this
         $blocks = array_combine(array_reverse($this->coords, true), array_reverse($this->blocks, true));
-        if($blocks === false) {
+        if (!$blocks) {
             return;
         }
 
@@ -256,8 +256,7 @@ class BlockArray implements UpdateLevelData, Serializable {
         $this->blocks = array_values($blocks);
 
         if($cleanCompressed) {
-            unset($this->compressedCoords);
-            unset($this->compressedBlocks);
+            unset($this->compressedCoords, $this->compressedBlocks);
         }
     }
 

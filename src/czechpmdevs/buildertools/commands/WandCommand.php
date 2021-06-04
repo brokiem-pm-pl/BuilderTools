@@ -25,7 +25,6 @@ use pocketmine\data\bedrock\EnchantmentIdMap;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\VanillaItems;
 use pocketmine\player\Player;
-use pocketmine\Player;
 
 class WandCommand extends BuilderToolsCommand {
 
@@ -33,15 +32,16 @@ class WandCommand extends BuilderToolsCommand {
         parent::__construct("/wand", "Switch wand tool", null, []);
     }
 
-    /** @noinspection PhpUnused */
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if(!$this->testPermission($sender)) return;
-        if(!$sender instanceof Player) {
+        if (!$this->testPermission($sender)) {
+            return;
+        }
+        if (!$sender instanceof Player) {
             $sender->sendMessage("§cThis command can be used only in game!");
             return;
         }
 
-        if(BuilderTools::getConfiguration()["items"]["wand-axe"]["enabled"]) {
+        if (BuilderTools::getConfiguration()["items"]["wand-axe"]["enabled"]) {
             $item = VanillaItems::WOODEN_AXE();
             $item->setCustomName(BuilderTools::getConfiguration()["items"]["wand-axe"]["name"]);
             /** @phpstan-ignore-next-line */

@@ -61,8 +61,8 @@ class CenterCommand extends BuilderToolsCommand {
         for($x = $min->getFloorX(); $x <= $max->getFloorX(); ++$x) {
             for($y = $min->getFloorY(); $y <= $max->getFloorY(); ++$y) {
                 for($z = $min->getFloorZ(); $z <= $max->getFloorZ(); ++$z) {
-                    $firstPos->getLevelNonNull()->setBlockIdAt($x, $y, $z, BlockLegacyIds::BEDROCK);
-                    $firstPos->getLevelNonNull()->setBlockDataAt($x, $y, $z, 0);
+                    $firstPos->getWorld()->setBlockIdAt($x, $y, $z, BlockLegacyIds::BEDROCK);
+                    $firstPos->getWorld()->setBlockDataAt($x, $y, $z, 0);
                 }
             }
         }

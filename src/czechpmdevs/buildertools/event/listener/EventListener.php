@@ -43,7 +43,6 @@ class EventListener implements Listener {
     /** @var float[] */
     private array $blockInfoClicks = [];
 
-    /** @noinspection PhpUnused */
     public function onAirClick(PlayerInteractEvent $event): void {
         if(!Selectors::isDrawingPlayer($player = $event->getPlayer())) {
             return;
@@ -69,16 +68,19 @@ class EventListener implements Listener {
     }
 
     public function onBlockTouch(PlayerInteractEvent $event): void {
-        if($event->getAction() !== PlayerInteractEvent::RIGHT_CLICK_BLOCK) return;
-        if(Selectors::isWandSelector($player = $event->getPlayer()) || ($event->getItem()->getId() == ItemIds::WOODEN_AXE && $event->getItem()->getNamedTag()->getTag("buildertools") instanceof ByteTag)) {
+        if ($event->getAction() !== PlayerInteractEvent::RIGHT_CLICK_BLOCK) {
+            return;
+        }
+
+        if (Selectors::isWandSelector($player = $event->getPlayer()) || ($event->getItem()->getId() == ItemIds::WOODEN_AXE && $event->getItem()->getNamedTag()->getTag("buildertools") instanceof ByteTag)) {
             // antispam ._.
-            if(isset($this->wandClicks[$player->getName()]) && microtime(true)-$this->wandClicks[$player->getName()] < 0.5) {
+            if (isset($this->wandClicks[$player->getName()]) && microtime(true) - $this->wandClicks[$player->getName()] < 0.5) {
                 return;
             }
 
             $this->wandClicks[$player->getName()] = microtime(true);
             $size = Selectors::addSelector($player, 2, $position = $event->getBlock()->getPos());
-            $player->sendMessage(BuilderTools::getPrefix()."§aSelected second position at {$position->getX()}, {$position->getY()}, {$position->getZ()}" . (is_int($size) ? " ($size)" : ""));
+            $player->sendMessage(BuilderTools::getPrefix() . "§aSelected second position at {$position->getX()}, {$position->getY()}, {$position->getZ()}" . (is_int($size) ? " ($size)" : ""));
             $event->cancel();
         }
 

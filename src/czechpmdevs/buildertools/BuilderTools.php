@@ -85,7 +85,6 @@ class BuilderTools extends PluginBase {
     /** @var Command[] */
     private static array $commands = [];
 
-    /** @noinspection PhpUnused */
     public function onEnable(): void {
         BuilderTools::$instance = $this;
 
@@ -97,7 +96,6 @@ class BuilderTools extends PluginBase {
         $this->loadSchematicsManager();
     }
 
-    /** @noinspection PhpUnused */
     public function onDisable(): void {
         $this->cleanCache();
     }

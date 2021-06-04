@@ -150,11 +150,6 @@ class Selectors {
     }
 
     public static function unloadPlayer(Player $player): void {
-        unset(Selectors::$wandSelectors[$player->getName()]);
-        unset(Selectors::$blockInfoPlayers[$player->getName()]);
-        unset(Selectors::$drawingPlayers[$player->getName()]);
-
-        unset(Selectors::$pos1[$player->getName()]);
-        unset(Selectors::$pos2[$player->getName()]);
+        unset(Selectors::$wandSelectors[$player->getName()], Selectors::$blockInfoPlayers[$player->getName()], Selectors::$drawingPlayers[$player->getName()], Selectors::$pos1[$player->getName()], Selectors::$pos2[$player->getName()]);
     }
 }

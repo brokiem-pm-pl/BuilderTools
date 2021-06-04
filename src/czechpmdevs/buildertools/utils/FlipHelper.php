@@ -26,17 +26,17 @@ use pocketmine\block\BlockLegacyIds;
 class FlipHelper {
 
     // TODO: lily pads, doors, trapdoors, terracotta, signs, buttons, tripwire hooks, banners, pillars (quartz, purpur), torches, item frames
-    public static function flip(int $axis, int &$id, int &$meta): void {
-        if($axis == Axis::Y_AXIS) {
-            if(FlipHelper::isSlab($id)) {
-                if($meta < 8) {
+    public static function flip(int $axis, int $id, int &$meta): void {
+        if ($axis == Axis::Y_AXIS) {
+            if (FlipHelper::isSlab($id)) {
+                if ($meta < 8) {
                     $meta += 8;
                 } else {
                     $meta -= 8;
                 }
             }
-            if(FlipHelper::isStairs($id)) {
-                if($meta < 4) {
+            if (FlipHelper::isStairs($id)) {
+                if ($meta < 4) {
                     $meta += 4;
                 } else {
                     $meta -= 4;

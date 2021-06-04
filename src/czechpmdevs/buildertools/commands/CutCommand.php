@@ -35,17 +35,19 @@ class CutCommand extends BuilderToolsCommand {
 
     /** @noinspection PhpUnused */
     public function execute(CommandSender $sender, string $commandLabel, array $args) {
-        if(!$this->testPermission($sender)) return;
-        if(!$sender instanceof Player) {
+        if (!$this->testPermission($sender)) {
+            return;
+        }
+        if (!$sender instanceof Player) {
             $sender->sendMessage("§cThis command can be used only in game!");
             return;
         }
-        if(!Selectors::isSelected(1, $sender)) {
-            $sender->sendMessage(BuilderTools::getPrefix()."§cFirst you need to select the first position.");
+        if (!Selectors::isSelected(1, $sender)) {
+            $sender->sendMessage(BuilderTools::getPrefix() . "§cFirst you need to select the first position.");
             return;
         }
-        if(!Selectors::isSelected(2, $sender)) {
-            $sender->sendMessage(BuilderTools::getPrefix()."§cFirst you need to select the second position.");
+        if (!Selectors::isSelected(2, $sender)) {
+            $sender->sendMessage(BuilderTools::getPrefix() . "§cFirst you need to select the second position.");
             return;
         }
 

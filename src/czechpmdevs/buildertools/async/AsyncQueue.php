@@ -23,7 +23,6 @@ namespace czechpmdevs\buildertools\async;
 use Closure;
 use pocketmine\Server;
 use function spl_object_hash;
-use function array_key_exists;
 
 class AsyncQueue {
 

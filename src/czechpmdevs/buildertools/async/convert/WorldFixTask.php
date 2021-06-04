@@ -20,17 +20,15 @@ declare(strict_types=1);
 
 namespace czechpmdevs\buildertools\async\convert;
 
+use czechpmdevs\buildertools\BuilderTools;
 use czechpmdevs\buildertools\editors\Fixer;
 use Error;
 use Generator;
 use pocketmine\scheduler\AsyncTask;
-use pocketmine\utils\MainLogger;
-use pocketmine\world\format\io\BaseWorldProvider;
 use pocketmine\world\format\io\exception\CorruptedChunkException;
 use pocketmine\world\format\io\region\Anvil;
 use pocketmine\world\format\io\region\CorruptedRegionException;
 use pocketmine\world\format\io\region\McRegion;
-use pocketmine\world\format\io\region\RegionLoader;
 use pocketmine\world\format\io\WorldProvider;
 use pocketmine\world\format\io\WorldProviderManager;
 use function basename;
@@ -45,7 +43,7 @@ use function round;
 
 // TODO
 class WorldFixTask extends AsyncTask {
-    
+
     /** @var string */
     public string $worldPath;
 
@@ -90,8 +88,7 @@ class WorldFixTask extends AsyncTask {
         try {
             /** @var WorldProvider $provider */
             $provider = new $providerClass($this->worldPath . DIRECTORY_SEPARATOR);
-        }
-        catch (Error $error) {
+        } catch (Error $error) {
             $this->error = "Error while loading provider: {$error->getMessage()}";
             return;
         }
@@ -123,7 +120,7 @@ class WorldFixTask extends AsyncTask {
                 try {
                     $chunk = $provider->loadChunk($chunkX, $chunkZ);
                 } catch (CorruptedChunkException $e) {
-//                    MainLogger::getLogger()->warning("[BuilderTools] Chunk $chunkX:$chunkZ is corrupted. Area from X=" . ($chunkX << 4) . ",Z=" . ($chunkZ << 4) . " to X=" . (($chunkX << 4) + 15) .",Z=" . (($chunkZ << 4) + 15) . " might not have been fixed.");
+                    //                    BuilderTools::getInstance()->getLogger()->warning("[BuilderTools] Chunk $chunkX:$chunkZ is corrupted. Area from X=" . ($chunkX << 4) . ",Z=" . ($chunkZ << 4) . " to X=" . (($chunkX << 4) + 15) .",Z=" . (($chunkZ << 4) + 15) . " might not have been fixed.");
                     continue;
                 }
 
@@ -147,14 +144,14 @@ class WorldFixTask extends AsyncTask {
             $timePerRegion = (microtime(true) - $startTime) / $regionsFixed;
             $expectedTime = gmdate("H:i:s", (int)ceil($timePerRegion * ($regionCount - $regionsFixed)));
 
-            MainLogger::getLogger()->debug("[BuilderTools] World is fixed from $percent% ($regionsFixed/$regionCount regions), $chunksFixed chunks fixed with speed of $timePerChunk seconds per chunk. Expected time: $expectedTime.");
+            BuilderTools::getInstance()->getLogger()->debug("[BuilderTools] World is fixed from $percent% ($regionsFixed/$regionCount regions), $chunksFixed chunks fixed with speed of $timePerChunk seconds per chunk. Expected time: $expectedTime.");
 
             $this->percent = (int)$percent;
             $provider->doGarbageCollection();
         }
 
         $this->time = round(microtime(true) - $startTime);
-        MainLogger::getLogger()->debug("[BuilderTools] World fixed in $this->time seconds, affected $chunksFixed chunks!");
+        BuilderTools::getInstance()->getLogger()->debug("[BuilderTools] World fixed in $this->time seconds, affected $chunksFixed chunks!");
 
         $this->done = true;
         $this->chunkCount = $chunksFixed;
@@ -182,7 +179,7 @@ class WorldFixTask extends AsyncTask {
             try {
                 $region = new McRegion($regionFilePath);
             } catch (CorruptedRegionException $e) {
-                MainLogger::getLogger()->warning("[BuilderTools] Region $regionX:$regionZ (File $regionFilePath) is corrupted. Area from X=" . ($regionX << 9) . ",Z=" . ($regionZ << 9) . " to X=" . ((($regionX + 1) << 9) - 1) .",Z=" . ((($regionZ + 1) << 9) - 1) . " might not have been fixed.");
+                BuilderTools::getInstance()->getLogger()->warning("[BuilderTools] Region $regionX:$regionZ (File $regionFilePath) is corrupted. Area from X=" . ($regionX << 9) . ",Z=" . ($regionZ << 9) . " to X=" . ((($regionX + 1) << 9) - 1) . ",Z=" . ((($regionZ + 1) << 9) - 1) . " might not have been fixed.");
                 continue;
             }
 
